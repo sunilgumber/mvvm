@@ -1,12 +1,10 @@
 package com.ameba.demo.swipe.viewModel;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.databinding.ObservableField;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 

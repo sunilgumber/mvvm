@@ -1,23 +1,13 @@
 package com.ameba.demo.swipe.view.fragment;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.ameba.demo.swipe.LocationUpdate.SmartLocationUpdate;
 import com.ameba.demo.swipe.R;
 import com.ameba.demo.swipe.databinding.FragmentTopBinding;
 import com.ameba.demo.swipe.view.activity.MainActivity;
@@ -25,21 +15,10 @@ import com.ameba.demo.swipe.view.listener.CompletedListener;
 import com.ameba.demo.swipe.view.listener.backpress.BaseBackPressedListener;
 import com.ameba.demo.swipe.constants.Constants;
 import com.ameba.demo.swipe.view.listener.LocationUpdateListener;
-import com.ameba.demo.swipe.map.MapMarkers;
-import com.ameba.demo.swipe.model.entity.DataLatLongdetails;
-import com.ameba.demo.swipe.util.CustomLog;
-import com.ameba.demo.swipe.util.GpsUtils;
 import com.ameba.demo.swipe.viewModel.TopViewModel;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 
 /**

@@ -80,7 +80,7 @@ public class MapMarkers {
                         info.setAddress(LatLongdetails.get(i).getAddressLine2());
                     else
                         info.setAddress(LatLongdetails.get(i).getAddressLine2());
-                    info.setDistance("x km");
+                    info.setDistance(LatLongdetails.get(i).getDate());
                     info.setTitle(LatLongdetails.get(i).getTitle());
                     info.setposition(i);
 

@@ -1,6 +1,5 @@
 package com.ameba.demo.swipe.util;
 
-import android.nfc.Tag;
 import android.util.Log;
 
 import com.ameba.demo.swipe.constants.Constants;

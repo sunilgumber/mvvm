@@ -3,18 +3,22 @@
   "msg": "success",
   "location_data": [
     {
-      "title": "title",
+      "id":"1",
+      "title": "event1",
       "geoLatitude": "30.7023343",
       "geoLongitude": "76.6810807",
-      "addressLine2": "addressLine2",
-      "city": "city"
+      "addressLine2": "Mohali",
+      "city": "city",
+      "date": "12/6/2018"
     },
     {
-      "title": "title",
+      "id":"2",
+      "title": "event2",
       "geoLatitude": "30.701968",
       "geoLongitude": "76.6804578",
-      "addressLine2": "addressLine2",
-      "city": "city"
+      "addressLine2": "Mohali",
+      "city": "city",
+      "date": "12/6/2018"
     }
   ]
 }

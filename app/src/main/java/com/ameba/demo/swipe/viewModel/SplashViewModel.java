@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
 
 import com.ameba.demo.swipe.constants.Constants;
 import com.ameba.demo.swipe.model.data.RetrofitHelper;

@@ -37,6 +37,9 @@ public class DataLatLongdetails {
         @Expose
         @SerializedName("title")
         private String title;
+        @Expose
+        @SerializedName("date")
+        private String date;
 
         public String getCity() {
             return city;
@@ -76,6 +79,14 @@ public class DataLatLongdetails {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
         }
     }
 
