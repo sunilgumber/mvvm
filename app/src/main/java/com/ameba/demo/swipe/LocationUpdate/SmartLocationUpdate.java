@@ -3,10 +3,9 @@ package com.ameba.demo.swipe.LocationUpdate;
 import android.content.Context;
 import android.location.Location;
 
-import com.ameba.demo.swipe.activity.MainActivity;
-import com.ameba.demo.swipe.inteface.LocationUpdateListener;
+import com.ameba.demo.swipe.view.activity.MainActivity;
+import com.ameba.demo.swipe.view.listener.LocationUpdateListener;
 import com.ameba.demo.swipe.util.CustomLog;
-import com.google.android.gms.maps.model.LatLng;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -27,7 +26,6 @@ public class SmartLocationUpdate {
     public SmartLocationUpdate(Context context, LocationUpdateListener locationUpdateListener) {
         this.listener = locationUpdateListener;
         this.context = context;
-        OneFixLoc();
     }
 
     public void ContinousUpdateLoc() {

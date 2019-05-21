@@ -1,0 +1,130 @@
+package com.ameba.demo.swipe.viewModel;
+
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.View;
+
+import com.ameba.demo.swipe.constants.Constants;
+import com.ameba.demo.swipe.model.data.RetrofitHelper;
+import com.ameba.demo.swipe.model.entity.Movie;
+import com.ameba.demo.swipe.util.GpsUtils;
+import com.ameba.demo.swipe.view.activity.SplashActivity;
+import com.ameba.demo.swipe.view.listener.CompletedListener;
+
+import rx.Subscriber;
+
+
+/**
+ * Created by HaohaoChang on 2017/2/11.
+ */
+public class SplashViewModel {
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private boolean isGPS;
+    private final Context context;
+    private Subscriber<Movie> subscriber;
+
+    private CompletedListener completedListener;
+
+    public SplashViewModel(Context context,CompletedListener completedListener) {
+        this.context=context;
+        this.completedListener = completedListener;
+       // getSplashData();
+    }
+
+
+    public void SwitchMainActivity() {
+        //permission check ofr sdk>23
+        if(!checkLocationPermission())
+            return;
+        AutomaticTurnGpsOn();
+    }
+
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // No explanation needed, we can request the permission.
+            ActivityCompat.requestPermissions((SplashActivity) context,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void AutomaticTurnGpsOn() {
+        new GpsUtils(context).turnGPSOn(new GpsUtils.onGpsListener() {
+            @Override
+            public void gpsStatus(boolean isGPSEnable) {
+                // turn on GPS
+                isGPS = isGPSEnable;
+                completedListener.onCompleted();
+
+            }
+        });
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == Constants.GPS_REQUEST) {
+                isGPS = true;
+            }
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(context,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        AutomaticTurnGpsOn();
+                    }
+
+                } else {
+                    completedListener.onFailed();
+                }
+                return;
+            }
+
+        }
+    }
+
+
+
+    //unused
+    public void CallSplashDataAPI(){
+        subscriber = new Subscriber<Movie>() {
+            @Override
+            public void onCompleted() {
+                Log.d("[MainViewModel]", "onCompleted");
+                completedListener.onCompleted();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Movie movie) {
+
+            }
+        };
+        RetrofitHelper.getInstance().getMovies(subscriber, 0, 20);
+    }
+}

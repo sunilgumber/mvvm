@@ -1,14 +1,13 @@
 package com.ameba.demo.swipe.map;
 
-import android.content.Context;
 import android.location.Location;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ameba.demo.swipe.R;
-import com.ameba.demo.swipe.fragment.TopFragment;
-import com.ameba.demo.swipe.pojo.DataLatLongdetails;
+import com.ameba.demo.swipe.view.fragment.TopFragment;
+import com.ameba.demo.swipe.model.entity.DataLatLongdetails;
 import com.ameba.demo.swipe.util.InfoWindowData;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
