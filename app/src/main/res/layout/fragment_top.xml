@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="TopViewModel"
+            type="com.ameba.demo.swipe.viewModel.TopViewModel"/>
+    </data>
+<RelativeLayout
+    android:id="@+id/fragmenttop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/map_toolbar"></include>
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/llchattoolbar"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map_container"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        map:uiZoomControls="true" />
+
+</RelativeLayout>
+
+
+
+</layout>

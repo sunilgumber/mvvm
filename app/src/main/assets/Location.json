@@ -1,0 +1,20 @@
+{
+  "status": "200",
+  "msg": "success",
+  "location_data": [
+    {
+      "title": "title",
+      "geoLatitude": "30.7023343",
+      "geoLongitude": "76.6810807",
+      "addressLine2": "addressLine2",
+      "city": "city"
+    },
+    {
+      "title": "title",
+      "geoLatitude": "30.701968",
+      "geoLongitude": "76.6804578",
+      "addressLine2": "addressLine2",
+      "city": "city"
+    }
+  ]
+}

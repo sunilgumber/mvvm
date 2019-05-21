@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- Text sizes -->
+    <dimen name="text_big">32sp</dimen>
+    <dimen name="_40sp">40sp</dimen>
+    <dimen name="space_small">5sp</dimen>
+
+</resources>

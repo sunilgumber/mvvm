@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="app_name">Harners</string>
+    <string name="bottom">Blue</string>
+    <string name="center">Home</string>
+    <string name="top">Purple</string>
+    <string name="left">Yellow</string>
+    <string name="right">Red</string>
+</resources>
