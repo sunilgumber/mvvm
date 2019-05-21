@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat
 apply plugin: 'com.android.application'
 
 android {
+    dataBinding {
+        enabled = true
+    }
     compileSdkVersion 27
 
     defaultConfig {
@@ -31,6 +34,7 @@ android {
             outputFileName = new File(newApkName)
         }
     }
+
 }
 
 dependencies {

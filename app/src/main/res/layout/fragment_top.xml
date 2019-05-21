@@ -1,11 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ameba.demo.swipe.viewModel.TopViewModel"/>
+    </data>
+<RelativeLayout
     style="@style/PageTitle"
     android:id="@+id/fragmenttop"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/map_toolbar"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/llchattoolbar"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary1"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            tools:ignore="NewApi">
+            <RelativeLayout
+                android:id="@+id/rlback"
+                android:layout_width="wrap_content"
+                android:paddingLeft="24dp"
+                android:minHeight="45dp"
+                android:layout_height="match_parent"
+                android:onClick="@{(v) -> viewModel.onBackClick()}"
+                >
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_keyboard_arrow_left_black_24dp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:layout_marginRight="60dp"
+                android:minHeight="45dp">
+
+                <LinearLayout
+                    android:id="@+id/lin_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="visible">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:text="Maps"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,3 +91,4 @@
         map:uiZoomControls="true" />
 
 </RelativeLayout>
+</layout>

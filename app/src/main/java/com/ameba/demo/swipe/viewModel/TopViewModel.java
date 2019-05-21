@@ -1,11 +1,37 @@
 package com.ameba.demo.swipe.viewModel;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.databinding.ObservableField;
+import android.location.Location;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
+import com.ameba.demo.swipe.LocationUpdate.SmartLocationUpdate;
+import com.ameba.demo.swipe.R;
+import com.ameba.demo.swipe.constants.Constants;
+import com.ameba.demo.swipe.map.MapMarkers;
 import com.ameba.demo.swipe.model.data.RetrofitHelper;
+import com.ameba.demo.swipe.model.entity.DataLatLongdetails;
 import com.ameba.demo.swipe.model.entity.Movie;
+import com.ameba.demo.swipe.util.CustomLog;
+import com.ameba.demo.swipe.util.GpsUtils;
+import com.ameba.demo.swipe.view.activity.MainActivity;
+import com.ameba.demo.swipe.view.fragment.TopFragment;
 import com.ameba.demo.swipe.view.listener.CompletedListener;
+import com.ameba.demo.swipe.view.listener.LocationUpdateListener;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import rx.Subscriber;
 
@@ -14,23 +40,40 @@ import rx.Subscriber;
  */
 
 public class TopViewModel {
-
+    public ObservableField<String> toolbar;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private boolean isGPS;
-    private final Context context;
+    private final TopFragment context;
     private Subscriber<Movie> subscriber;
+    MainActivity mainActivity;
+    SmartLocationUpdate smartLocation;
 
+    private SupportMapFragment supportMapFragment;
+    private GoogleMap map;
+    ArrayList<DataLatLongdetails.dataEntity> LatLongdetails = new ArrayList<>();
     private CompletedListener completedListener;
 
 
-    public TopViewModel(Context context, CompletedListener completedListener) {
-        this.context=context;
+    public TopViewModel(TopFragment context, CompletedListener completedListener) {
+        this.context = context;
+        mainActivity = (MainActivity) context.getActivity();
         this.completedListener = completedListener;
+        initdata();
         // getSplashData();
     }
 
+    private void initdata() {
+        toolbar = new ObservableField<>();
+        toolbar.set("Mapss");
+    }
+
+    public void onBackClick() {
+        mainActivity.movetocenter();
+    }
+
+
     //unused
-    public void CallEventsDataAPI(){
+    public void CallEventsDataAPI() {
         subscriber = new Subscriber<Movie>() {
             @Override
             public void onCompleted() {
@@ -49,5 +92,60 @@ public class TopViewModel {
             }
         };
         RetrofitHelper.getInstance().getMovies(subscriber, 0, 20);
+    }
+
+    public void startLocation(LocationUpdateListener listener) {
+        smartLocation=new SmartLocationUpdate(context.getActivity(),listener);
+        smartLocation.ContinousUpdateLoc();
+    }
+
+    public void LoadMapOnValidCordinates(Location location) {
+        if (GpsUtils.isvalidcoordinates(location)){
+            loadmap(location);
+            loadjson();
+        }
+
+    }
+
+
+    private void loadjson() {
+        DataLatLongdetails dataLatLongdetails=new Gson().fromJson(Constants.loadJSONFromAsset(context.getActivity(), "Location.json"),DataLatLongdetails.class);
+        LatLongdetails= (ArrayList<DataLatLongdetails.dataEntity>) dataLatLongdetails.getLocation_data();
+        CustomLog.debug(new Gson().toJson(LatLongdetails));
+    }
+
+
+    private void loadmap(Location location) {
+        try {
+            mainActivity.currentlatlng=new LatLng(location.getLatitude(),location.getLongitude());
+            FragmentManager fm = (context.getActivity()).getSupportFragmentManager();
+            if (supportMapFragment == null) {
+                supportMapFragment = SupportMapFragment.newInstance();
+                fm.beginTransaction().replace(R.id.map_container, supportMapFragment).commit();
+            }
+            supportMapFragment.getMapAsync((OnMapReadyCallback) context);
+
+        }
+        catch (Exception e){
+            CustomLog.error(e.toString());
+        }
+    }
+
+
+    public void stoplocation() {
+        smartLocation.stoplocation();
+    }
+    MapMarkers mapMarkers;
+    public void onMapReady(GoogleMap googleMap, TopFragment topFragment) {
+        map = googleMap;
+        if (ActivityCompat.checkSelfPermission(context.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(context.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        map.setMyLocationEnabled(true);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mainActivity.currentlatlng, 15);
+        map.animateCamera(cameraUpdate);
+        mapMarkers=new MapMarkers(googleMap,topFragment,LatLongdetails,mainActivity.currentlatlng);
+        mapMarkers.afterMapLoad();;
     }
 }
