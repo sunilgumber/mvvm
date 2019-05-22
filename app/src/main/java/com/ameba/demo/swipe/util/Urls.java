@@ -1,4 +1,4 @@
-package com.ameba.demo.swipe.constants;
+package com.ameba.demo.swipe.util;
 
 public class Urls {
     public static final String RESPONSE_CODE_200 ="200";

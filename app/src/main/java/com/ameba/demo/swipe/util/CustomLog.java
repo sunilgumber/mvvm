@@ -2,8 +2,6 @@ package com.ameba.demo.swipe.util;
 
 import android.util.Log;
 
-import com.ameba.demo.swipe.constants.Constants;
-
 /**
  * Created by ameba on 6/2/19.
  */

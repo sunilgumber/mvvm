@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 
 import com.ameba.demo.swipe.R;
 import com.ameba.demo.swipe.databinding.FragmentTopBinding;
+import com.ameba.demo.swipe.util.CustomLog;
 import com.ameba.demo.swipe.view.activity.MainActivity;
 import com.ameba.demo.swipe.view.listener.CompletedListener;
 import com.ameba.demo.swipe.view.listener.backpress.BaseBackPressedListener;
-import com.ameba.demo.swipe.constants.Constants;
-import com.ameba.demo.swipe.view.listener.LocationUpdateListener;
+import com.ameba.demo.swipe.util.Constants;
+import com.ameba.demo.swipe.view.listener.LocationUpdate.LocationUpdateListener;
 import com.ameba.demo.swipe.viewModel.TopViewModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,13 +25,12 @@ import com.google.android.gms.maps.model.Marker;
 /**
  * Fragment to manage the top page of the 5 pages application navigation (top, center, bottom, left, right).
  */
-public class TopFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,CompletedListener,LocationUpdateListener {
+public class TopFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener,CompletedListener,LocationUpdateListener,GoogleMap.OnMarkerClickListener {
 
     private Context mContext;
     MainActivity mainActivity;
     FragmentTopBinding fragmentTopBinding;
     TopViewModel topViewModel;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,18 +51,15 @@ public class TopFragment extends Fragment implements OnMapReadyCallback, GoogleM
         topViewModel.startLocation(this);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         topViewModel.onMapReady(googleMap,TopFragment.this);
 
     }
 
-
-
     @Override
     public void onInfoWindowClick(Marker marker) {
-
+        CustomLog.error(marker.getId());
     }
 
     @Override
@@ -70,7 +67,6 @@ public class TopFragment extends Fragment implements OnMapReadyCallback, GoogleM
         super.onDestroy();
         topViewModel.stoplocation();
     }
-
 
     @Override
     public void onCompleted() {
@@ -91,5 +87,11 @@ public class TopFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void Continous(Location location) {
          topViewModel.LoadMapOnValidCordinates(location);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        topViewModel.showDetailSlide(marker);
+        return false;
     }
 }

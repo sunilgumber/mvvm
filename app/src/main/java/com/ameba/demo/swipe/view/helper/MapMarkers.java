@@ -1,4 +1,4 @@
-package com.ameba.demo.swipe.map;
+package com.ameba.demo.swipe.view.helper;
 
 import android.location.Location;
 import android.view.View;
@@ -30,7 +30,7 @@ public class MapMarkers {
     private Marker currentLocationMarker;
     LatLng currentlocation;
 
-    public MapMarkers(GoogleMap map, TopFragment context, ArrayList<DataLatLongdetails.dataEntity> latLongdetails,LatLng currentlocation) {
+    public MapMarkers(GoogleMap map, TopFragment context, ArrayList<DataLatLongdetails.dataEntity> latLongdetails, LatLng currentlocation) {
         this.map = map;
         this.context = context;
         LatLongdetails = latLongdetails;
@@ -77,9 +77,9 @@ public class MapMarkers {
 
                     InfoWindowData info = new InfoWindowData();
                     if (!LatLongdetails.get(i).getAddressLine2().equals(""))
-                        info.setAddress(LatLongdetails.get(i).getAddressLine2());
+                    info.setAddress(LatLongdetails.get(i).getAddressLine2());
                     else
-                        info.setAddress(LatLongdetails.get(i).getAddressLine2());
+                    info.setAddress(LatLongdetails.get(i).getAddressLine2());
                     info.setDistance(LatLongdetails.get(i).getDate());
                     info.setTitle(LatLongdetails.get(i).getTitle());
                     info.setposition(i);
@@ -89,7 +89,6 @@ public class MapMarkers {
 
                     currentLocationMarker = map.addMarker(markerOptions);
                     currentLocationMarker.setTag(info);
-                    currentLocationMarker.showInfoWindow();
                 }
             }
         }

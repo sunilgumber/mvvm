@@ -1,4 +1,4 @@
-package com.ameba.demo.swipe.constants;
+package com.ameba.demo.swipe.util;
 
 import android.content.Context;
 

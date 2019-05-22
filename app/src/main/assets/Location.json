@@ -4,16 +4,16 @@
   "location_data": [
     {
       "id":"1",
-      "title": "event1",
+      "title": "Sugar",
       "geoLatitude": "30.7023343",
       "geoLongitude": "76.6810807",
-      "addressLine2": "Mohali",
+      "addressLine2": "Wotta,Mohali",
       "city": "city",
       "date": "12/6/2018"
     },
     {
       "id":"2",
-      "title": "event2",
+      "title": "Taj",
       "geoLatitude": "30.701968",
       "geoLongitude": "76.6804578",
       "addressLine2": "Mohali",

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.ameba.demo.swipe.R;
 import com.ameba.demo.swipe.view.activity.MainActivity;
 import com.ameba.demo.swipe.view.adapter.FragmentsClassesPagerAdapter;
-import com.ameba.demo.swipe.constants.Constants;
+import com.ameba.demo.swipe.util.Constants;
 import com.ameba.demo.swipe.view.listener.event.EventBus;
 import com.ameba.demo.swipe.view.listener.event.PageChangedEvent;
 

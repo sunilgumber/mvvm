@@ -1,4 +1,4 @@
-package com.ameba.demo.swipe.map;
+package com.ameba.demo.swipe.view.helper;
 
 import android.app.Activity;
 import android.content.Context;

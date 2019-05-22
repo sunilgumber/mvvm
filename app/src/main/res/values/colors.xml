@@ -5,6 +5,7 @@
     <color name="red">#FF0000</color>
     <color name="black">#222</color>
     <color name="yellow">#FFFF00</color>
+    <color name="white">#fff</color>
     <color name="colorPrimary1">#0290e2</color>
 
 </resources>

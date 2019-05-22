@@ -7,26 +7,29 @@ import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
 
-import com.ameba.demo.swipe.LocationUpdate.SmartLocationUpdate;
+import com.ameba.demo.swipe.view.listener.LocationUpdate.SmartLocationUpdate;
 import com.ameba.demo.swipe.R;
-import com.ameba.demo.swipe.constants.Constants;
-import com.ameba.demo.swipe.map.MapMarkers;
+import com.ameba.demo.swipe.util.Constants;
+import com.ameba.demo.swipe.view.helper.MapMarkers;
 import com.ameba.demo.swipe.model.data.RetrofitHelper;
 import com.ameba.demo.swipe.model.entity.DataLatLongdetails;
 import com.ameba.demo.swipe.model.entity.Movie;
 import com.ameba.demo.swipe.util.CustomLog;
 import com.ameba.demo.swipe.util.GpsUtils;
+import com.ameba.demo.swipe.util.InfoWindowData;
 import com.ameba.demo.swipe.view.activity.MainActivity;
 import com.ameba.demo.swipe.view.fragment.TopFragment;
 import com.ameba.demo.swipe.view.listener.CompletedListener;
-import com.ameba.demo.swipe.view.listener.LocationUpdateListener;
+import com.ameba.demo.swipe.view.listener.LocationUpdate.LocationUpdateListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -39,6 +42,10 @@ import rx.Subscriber;
 
 public class TopViewModel {
     public ObservableField<String> toolbar;
+    public ObservableField<String> eventname;
+    public ObservableField<String> eventdate;
+    public ObservableField<String> eventadress;
+    public ObservableField<Integer> layoutdetail;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private boolean isGPS;
     private final TopFragment context;
@@ -62,7 +69,11 @@ public class TopViewModel {
 
     private void initdata() {
         toolbar = new ObservableField<>();
-        toolbar.set("Mapss");
+        eventadress = new ObservableField<>();
+        eventdate = new ObservableField<>();
+        eventname = new ObservableField<>();
+        layoutdetail = new ObservableField<>();
+        layoutdetail.set(View.GONE);
     }
 
     public void onBackClick() {
@@ -98,9 +109,8 @@ public class TopViewModel {
     }
 
     public void LoadMapOnValidCordinates(Location location) {
-        if (GpsUtils.isvalidcoordinates(location)){
+        if (GpsUtils.isvalidcoordinates(location)&&GpsUtils.isvaliddistance(location)){
             loadmap(location);
-            loadjson();
         }
 
     }
@@ -135,6 +145,8 @@ public class TopViewModel {
     }
     MapMarkers mapMarkers;
     public void onMapReady(GoogleMap googleMap, TopFragment topFragment) {
+        googleMap.setOnMarkerClickListener(context);
+        loadjson();
         map = googleMap;
         if (ActivityCompat.checkSelfPermission(context.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -145,5 +157,13 @@ public class TopViewModel {
         map.animateCamera(cameraUpdate);
         mapMarkers=new MapMarkers(googleMap,topFragment,LatLongdetails,mainActivity.currentlatlng);
         mapMarkers.afterMapLoad();;
+    }
+
+    public void showDetailSlide(Marker marker) {;
+        InfoWindowData infoWindowData=new Gson().fromJson(new Gson().toJson(marker.getTag()),InfoWindowData.class);
+        layoutdetail.set(View.VISIBLE);
+        eventname.set(LatLongdetails.get(infoWindowData.getposition()).getTitle());
+        eventadress.set(LatLongdetails.get(infoWindowData.getposition()).getAddressLine2());
+        eventdate.set(LatLongdetails.get(infoWindowData.getposition()).getDate());
     }
 }

@@ -90,5 +90,103 @@
         android:layout_height="match_parent"
         map:uiZoomControls="true" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:layout_margin="20sp"
+        android:visibility="@{viewModel.layoutdetail}"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:orientation="vertical">
+            <ImageView
+                android:gravity="center"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_event_note"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Event Name"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="2sp"
+                android:gravity="left"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Event Address"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="2sp"
+                android:gravity="left"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Event Date"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="2sp"
+                android:gravity="left"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.eventname}"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:padding="2sp"
+            android:gravity="left"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.eventadress}"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:padding="2sp"
+            android:gravity="left"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.eventdate}"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:padding="2sp"
+            android:gravity="left"
+            />
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>
 </layout>

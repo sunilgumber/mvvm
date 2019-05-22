@@ -1,10 +1,9 @@
-package com.ameba.demo.swipe.LocationUpdate;
+package com.ameba.demo.swipe.view.listener.LocationUpdate;
 
 import android.content.Context;
 import android.location.Location;
 
 import com.ameba.demo.swipe.view.activity.MainActivity;
-import com.ameba.demo.swipe.view.listener.LocationUpdateListener;
 import com.ameba.demo.swipe.util.CustomLog;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;

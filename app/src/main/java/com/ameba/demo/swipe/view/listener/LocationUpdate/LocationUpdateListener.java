@@ -1,4 +1,4 @@
-package com.ameba.demo.swipe.view.listener;
+package com.ameba.demo.swipe.view.listener.LocationUpdate;
 
 import android.location.Location;
 

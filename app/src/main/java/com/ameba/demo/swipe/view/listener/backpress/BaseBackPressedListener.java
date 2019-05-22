@@ -3,7 +3,7 @@ package com.ameba.demo.swipe.view.listener.backpress;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import com.ameba.demo.swipe.view.activity.MainActivity;
-import com.ameba.demo.swipe.constants.Constants;
+import com.ameba.demo.swipe.util.Constants;
 
 
 public class BaseBackPressedListener implements OnBackPressedListener{

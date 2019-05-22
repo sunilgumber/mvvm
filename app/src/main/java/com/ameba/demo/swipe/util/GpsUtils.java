@@ -14,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ameba.demo.swipe.constants.Constants;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -33,6 +32,7 @@ public class GpsUtils {
     private LocationSettingsRequest mLocationSettingsRequest;
     private LocationManager locationManager;
     private LocationRequest locationRequest;
+    private static  Location prevlocation=new Location("");
     public GpsUtils(Context context) {
         this.context = context;
 
@@ -123,5 +123,17 @@ public class GpsUtils {
             CustomLog.error(e);
         }
         return gpsStatus;
+    }
+
+    public static boolean isvaliddistance(Location current){
+        if(prevlocation.getLongitude()==0.0||prevlocation.getLongitude()==0.0){
+          prevlocation=current;
+          return true;
+        }
+        if(current.distanceTo(prevlocation)<100){
+            return false;
+        }
+        prevlocation=current;
+        return true;
     }
 }

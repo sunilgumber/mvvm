@@ -9,7 +9,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
 import com.ameba.demo.swipe.R;
 import com.ameba.demo.swipe.view.listener.backpress.OnBackPressedListener;
-import com.ameba.demo.swipe.constants.Constants;
+import com.ameba.demo.swipe.util.Constants;
 import com.ameba.demo.swipe.view.listener.event.EventBus;
 import com.ameba.demo.swipe.view.listener.VerticalPageListener;
 import com.ameba.demo.swipe.viewpager.VerticalPager;
