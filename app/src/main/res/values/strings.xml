@@ -5,4 +5,8 @@
     <string name="bottom">Blue</string>
     <string name="left">Yellow</string>
     <string name="right">Red</string>
+    <string name="maps">Maps</string>
+    <string name="eventname">Event Name</string>
+    <string name="eventaddress">Event Address</string>
+    <string name="eventdate">Event Date</string>
 </resources>

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.ameba.demo.swipe.viewModel.TopViewModel"/>
+            type="com.ameba.harness.swipe.viewModel.TopViewModel"/>
     </data>
 <RelativeLayout
     style="@style/PageTitle"
@@ -46,7 +46,7 @@
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
                     android:background="@drawable/ic_keyboard_arrow_left_black_24dp"
-                    />
+                    android:contentDescription="TODO" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:text="Maps"/>
+                        android:text="@string/maps"/>
 
                 </LinearLayout>
 
@@ -113,7 +113,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_event_note"/>
+                android:src="@drawable/ic_event_note"
+                android:contentDescription="TODO" />
     </LinearLayout>
 
         <LinearLayout
@@ -125,7 +126,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Event Name"
+                android:text="@string/eventname"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:padding="2sp"
@@ -134,7 +135,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Event Address"
+                android:text="@string/eventaddress"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:padding="2sp"
@@ -143,7 +144,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Event Date"
+                android:text="@string/eventdate"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:padding="2sp"
