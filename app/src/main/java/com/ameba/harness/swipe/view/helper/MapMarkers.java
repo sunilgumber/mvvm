@@ -65,7 +65,7 @@ public class MapMarkers {
 
             if (lat != null && lng != null && !lat.isEmpty() && !lng.isEmpty()) {
                 MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.avatar));
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_foreground));
                 latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
                 markerOptions.position(latLng);
                 markerOptions.title(LatLongdetails.get(i).getTitle());

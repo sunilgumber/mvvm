@@ -8,15 +8,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-
-import com.ameba.harness.swipe.model.data.RetrofitHelper;
 import com.ameba.harness.swipe.util.Constants;
+import com.ameba.harness.swipe.util.CustomLog;
 import com.ameba.harness.swipe.util.GpsUtils;
 import com.ameba.harness.swipe.view.activity.SplashActivity;
 import com.ameba.harness.swipe.view.listener.CompletedListener;
 
-import rx.Subscriber;
 
 
 /**
@@ -58,7 +55,7 @@ public class SplashViewModel {
         }
     }
 
-    private void AutomaticTurnGpsOn() {
+    public void AutomaticTurnGpsOn() {
         new GpsUtils(context).turnGPSOn(new GpsUtils.onGpsListener() {
             @Override
             public void gpsStatus(boolean isGPSEnable) {
@@ -75,6 +72,7 @@ public class SplashViewModel {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == Constants.GPS_REQUEST) {
                 isGPS = true;
+                completedListener.onCompleted();
             }
         }
     }

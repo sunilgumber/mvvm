@@ -14,8 +14,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ameba.harness.swipe.util.Constants;
-import com.ameba.harness.swipe.util.CustomLog;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -55,6 +53,7 @@ public class GpsUtils {
             if (onGpsListener != null) {
                 onGpsListener.gpsStatus(true);
             }
+            CustomLog.error("locationManager.isProviderEnabled");
         } else {
             mSettingsClient
                     .checkLocationSettings(mLocationSettingsRequest)
@@ -62,6 +61,7 @@ public class GpsUtils {
                         @SuppressLint("MissingPermission")
                         @Override
                         public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                            CustomLog.error("onSuccess");
 //  GPS is already enable, callback GPS status through listener
                             if (onGpsListener != null) {
                                 onGpsListener.gpsStatus(true);
@@ -71,10 +71,12 @@ public class GpsUtils {
                     .addOnFailureListener((Activity) context, new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            CustomLog.error("onFailure");
                             int statusCode = ((ApiException) e).getStatusCode();
                             switch (statusCode) {
                                 case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                                     try {
+                                        CustomLog.error("onFailure1");
                                         // Show the dialog by calling startResolutionForResult(), and check the
                                         // result in onActivityResult().
                                         ResolvableApiException rae = (ResolvableApiException) e;
@@ -84,6 +86,7 @@ public class GpsUtils {
                                     }
                                     break;
                                 case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                    CustomLog.error("onFailure2");
                                     String errorMessage = "Location settings are inadequate, and cannot be " +
                                             "fixed here. Fix in Settings.";
                                     Log.e(TAG, errorMessage);

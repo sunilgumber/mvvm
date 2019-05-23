@@ -27,10 +27,7 @@ public class SplashActivityTest {
         splashActivity = null;
     }
 
-    @Test
-    public void TlViewPager() {
-        splashActivity.SwitchMainActivity();
-    }
+   //test runtime permisiion graned for location sdk>23
 
 
 }

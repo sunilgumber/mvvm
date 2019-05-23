@@ -1,6 +1,8 @@
 package com.ameba.harness.swipe.viewModel;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.pm.PackageManager;
 import android.databinding.ObservableField;
 import android.location.Location;
@@ -156,11 +158,23 @@ public class TopViewModel {
         mapMarkers.afterMapLoad();
     }
 
-    public void showDetailSlide(Marker marker) {
-        InfoWindowData infoWindowData=new Gson().fromJson(new Gson().toJson(marker.getTag()),InfoWindowData.class);
-        layoutdetail.set(View.VISIBLE);
-        eventname.set(LatLongdetails.get(infoWindowData.getposition()).getTitle());
-        eventadress.set(LatLongdetails.get(infoWindowData.getposition()).getAddressLine2());
-        eventdate.set(LatLongdetails.get(infoWindowData.getposition()).getDate());
+    public void showDetailSlide(final Marker marker) {
+        final View view=context.getActivity().findViewById(R.id.lllayoutdetail);
+        view.animate()
+                .translationY(2*view.getHeight())
+                .alpha(1.0f)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        view.animate().translationY(0);
+                        InfoWindowData infoWindowData=new Gson().fromJson(new Gson().toJson(marker.getTag()),InfoWindowData.class);
+                        layoutdetail.set(View.VISIBLE);
+                        eventname.set(LatLongdetails.get(infoWindowData.getposition()).getTitle());
+                        eventadress.set(LatLongdetails.get(infoWindowData.getposition()).getAddressLine2());
+                        eventdate.set(LatLongdetails.get(infoWindowData.getposition()).getDate());
+                    }
+                });
+
     }
 }
